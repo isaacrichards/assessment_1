@@ -8,6 +8,7 @@ class Moons:
         self.names = self.names()
         
     def data(self):
+        """Open and read the Jupiter moons database, and save it as an attribute of this class .data"""
 
         database_service = "sqlite"
 
@@ -25,6 +26,8 @@ class Moons:
     
     
     def names(self):
+        """Determine the names for each of the moons, useful when data from one moon is required but the name is unkown, save a .names     attribute of the 'moons' class"""
+        
         
         name_list = []
         
@@ -33,6 +36,10 @@ class Moons:
             name_list.append(name)
         
         return name_list
+    
+    def plot(self, x_value, y_value):
+        
+        
 
     #def names(self):
 
