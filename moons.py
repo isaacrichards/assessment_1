@@ -7,6 +7,7 @@ class Moons:
         self.data = self.data()#attribute the whole data base to Moons.data
         self.names = self.names()
         
+        
     def data(self):
         """Open and read the Jupiter moons database, and save it as an attribute of this class .data"""
 
@@ -38,8 +39,15 @@ class Moons:
         return name_list
     
     def plot(self, x_value, y_value):
-        
-        
 
-    #def names(self):
+        import matplotlib.pyplot as plt
+
+        fig, ax = plt.subplots()
+
+        plt.scatter(self.data[x_value], self.data[y_value])
+        plt.xlabel(x_value)
+        plt.ylabel(y_value)
+        
+        plt.show()
+       
 
