@@ -56,7 +56,8 @@ class Moons:
         return name_list
     
 
-    def plot(self, x_value, y_value):
+    def plot(self, x_value, y_value):#input of two column headings from the data set. From these plot against one another. 
+        """Method for plotting two variables from the whole data set against oneanother. Specify column heading x,y"""
 
         import matplotlib.pyplot as plt
 
@@ -67,9 +68,10 @@ class Moons:
         plt.ylabel(y_value)
         
         plt.show()
+        
 
     def train(self):
-
+        """Functionality for predicting the mass of the central orbital body using sklearn linear regression modelling"""
         
         #storing and altering the data into appropriate units (km --> m & days --> s)
         training_x_variable = (self.data[["distance_km"]]*1000)**3
@@ -85,6 +87,7 @@ class Moons:
         from sklearn.model_selection import train_test_split
 
         x_train, x_test, y_train, y_test = train_test_split(training_x_variable, training_y_variable, test_size=0.3, random_state=42)
+        
 
         #fit the model to the training data defined above
         model.fit(x_train, y_train)
@@ -92,18 +95,19 @@ class Moons:
         # use the model to predict y-values of the testing set
         pred = model.predict(x_test)
 
+
         from sklearn.metrics import r2_score, mean_squared_error
 
-        #validate the accuracy of the model
+        #validate the accuracy of the model using sklearn.metrics functions
         print(f"model r2_score: {r2_score(y_test,pred)}")
         print(f"root mean squared error: {mean_squared_error(y_test,pred, squared=False)}")
 
         #calculate the mass of Jupiter following the procedure outlined before
         import numpy as np
 
-        G = 6.67e-11
+        G = 6.67e-11 #hyperparameter for gravitational constant G
         
-        mass_estimate = (4*np.pi**2) / (model.coef_[0]*G)
+        mass_estimate = (4*np.pi**2) / (model.coef_[0]*G)#the model.coef_[0] contains the required unknown, this rearrangement gives the mass of the main body.
 
         #return this mass estimate
 
